@@ -1,38 +1,38 @@
 require "test_helper"
 
-class AliasesControllerTest < ActionDispatch::IntegrationTest
+class AliasControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
-    get aliases_index_url
+    get alias_index_url
     assert_response :success
   end
 
   test "should get show" do
-    get aliases_show_url
+    get alias_show_url
     assert_response :success
   end
 
   test "should get new" do
-    get aliases_new_url
+    get alias_new_url
     assert_response :success
   end
 
   test "should get create" do
-    get aliases_create_url
+    get alias_create_url
     assert_response :success
   end
 
   test "should get edit" do
-    get aliases_edit_url
+    get alias_edit_url
     assert_response :success
   end
 
   test "should get update" do
-    get aliases_update_url
+    get alias_update_url
     assert_response :success
   end
 
   test "should get destroy" do
-    get aliases_destroy_url
+    get alias_destroy_url
     assert_response :success
   end
 end

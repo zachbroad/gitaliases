@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -9,11 +10,15 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  get "/aliases", to: "aliases#index"
-  post "/aliases", to: "aliases#create"
-
-  get "/aliases/:id", to: "aliases#show"
-
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # Public home page showing all aliases
+  get "/" => "home#index", as: :home
+  root "home#index"
+  
+  # User profile routes
+  get "profile/:username" => "profiles#show", as: :profile
+  get "profile/:username/aliases" => "profiles#aliases", as: :profile_aliases
+  
+  # Authenticated user's alias management
+  resources :aliases, except: [:index]
+  get "my/aliases" => "aliases#index", as: :my_aliases
 end
