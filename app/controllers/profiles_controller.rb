@@ -2,7 +2,7 @@ class ProfilesController < ApplicationController
   before_action :find_user
   
   def show
-    @aliases = @user.aliases.limit(6)
+    @aliases = @user.aliases
   end
 
   def aliases
