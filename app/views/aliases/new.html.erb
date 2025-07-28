@@ -33,17 +33,17 @@
 
         <div>
           <%= form.label :name, class: "block text-sm font-medium text-gray-700" %>
-          <%= form.text_field :name, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", placeholder: "e.g. st, co, br" %>
+          <%= form.text_field :name, class: "mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 sm:text-sm p-3 bg-gray-50 hover:bg-white focus:bg-white", placeholder: "e.g. st, co, br" %>
         </div>
 
         <div>
           <%= form.label :description, class: "block text-sm font-medium text-gray-700" %>
-          <%= form.text_area :description, rows: 3, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", placeholder: "Describe what this alias does..." %>
+          <%= form.text_area :description, rows: 4, class: "mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 sm:text-sm resize-none p-3 bg-gray-50 hover:bg-white focus:bg-white", placeholder: "Describe what this alias does and when to use it..." %>
         </div>
 
         <div>
           <%= form.label :code, "Git Command", class: "block text-sm font-medium text-gray-700" %>
-          <%= form.text_area :code, rows: 2, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm font-mono", placeholder: "e.g. status --short" %>
+          <%= form.text_area :code, rows: 3, class: "mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 sm:text-sm font-mono resize-none p-3 bg-gray-50 hover:bg-white focus:bg-white leading-relaxed", placeholder: "e.g. status --short --branch" %>
         </div>
 
         <div class="flex justify-end space-x-3">
