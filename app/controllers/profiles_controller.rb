@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :find_user
+  before_action :find_user, :except => :list
   
   def show
     @aliases = @user.aliases
@@ -8,7 +8,11 @@ class ProfilesController < ApplicationController
   def aliases
     @aliases = @user.aliases
   end
-  
+
+  def list
+    @profiles = User.all
+  end
+
   private
   
   def find_user

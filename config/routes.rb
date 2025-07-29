@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   root "home#index"
 
   # User profile routes
+  get "profiles" => "profiles#list", as: :profiles
   get "profile/:username" => "profiles#show", as: :profile
   get "profile/:username/aliases" => "profiles#aliases", as: :profile_aliases
 

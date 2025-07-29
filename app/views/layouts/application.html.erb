@@ -23,23 +23,79 @@
   </head>
 
   <body class="bg-gray-50 min-h-screen">
-    <header class="bg-white shadow-sm border-b border-gray-200">
+    <header class="bg-white shadow-lg border-b border-gray-200">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center py-6">
+        <div class="flex justify-between items-center py-4">
+          <!-- Logo -->
           <div class="flex items-center">
-            <%= link_to root_path, class: "text-2xl font-bold text-gray-900 hover:text-indigo-600" do %>
-              Git Aliases
+            <%= link_to root_path, class: "flex items-center space-x-2 text-2xl font-bold text-gray-900 hover:text-indigo-600 transition-colors duration-200" do %>
+              <div class="h-8 w-8 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
+                <span class="text-white font-bold text-sm">GA</span>
+              </div>
+              <span>Git Aliases</span>
             <% end %>
           </div>
           
-          <div class="flex items-center space-x-4">
+          <!-- Navigation -->
+          <nav class="hidden md:flex items-center space-x-1">
+            <%= link_to root_path, class: "flex items-center space-x-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 #{current_page?(root_path) ? 'bg-indigo-100 text-indigo-700' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-100'}" do %>
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+              <span>Home</span>
+            <% end %>
+
             <% if user_signed_in? %>
-              <%= link_to "My Aliases", my_aliases_path, class: "text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium" %>
-              <%= link_to "Add Alias", new_alias_path, class: "bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-md text-sm font-medium" %>
-              <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium" %>
+              <%= link_to my_aliases_path, class: "flex items-center space-x-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 #{current_page?(my_aliases_path) ? 'bg-indigo-100 text-indigo-700' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-100'}" do %>
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                <span>My Aliases</span>
+              <% end %>
+            <% end %>
+
+            <%= link_to profiles_path, class: "flex items-center space-x-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 #{current_page?(profiles_path) ? 'bg-indigo-100 text-indigo-700' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-100'}" do %>
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <span>Users</span>
+            <% end %>
+          </nav>
+          
+          <!-- User Actions -->
+          <div class="flex items-center space-x-2">
+            <% if user_signed_in? %>
+              <!-- User Avatar Dropdown -->
+              <div class="relative">
+                <button class="flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-100 transition-colors duration-200">
+                  <div class="h-6 w-6 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center">
+                    <span class="text-white font-medium text-xs">
+                      <%= current_user.email.first.upcase %>
+                    </span>
+                  </div>
+                  <span class="hidden sm:block"><%= current_user.email.split('@').first %></span>
+                </button>
+              </div>
+              
+              <%= link_to new_alias_path, class: "inline-flex items-center space-x-1 px-4 py-2 rounded-lg text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200" do %>
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+                <span>Add Alias</span>
+              <% end %>
+              
+              <%= link_to destroy_user_session_path, method: :delete, class: "text-gray-500 hover:text-gray-700 px-2 py-2 rounded-lg text-sm transition-colors duration-200" do %>
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+              <% end %>
             <% else %>
-              <%= link_to "Sign In", new_user_session_path, class: "text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium" %>
-              <%= link_to "Sign Up", new_user_registration_path, class: "bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-md text-sm font-medium" %>
+              <%= link_to new_user_session_path, class: "px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-100 transition-colors duration-200" do %>
+                Sign In
+              <% end %>
+              <%= link_to new_user_registration_path, class: "px-4 py-2 rounded-lg text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200" do %>
+                Sign Up
+              <% end %>
             <% end %>
           </div>
         </div>

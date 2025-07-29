@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_29_022127) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_29_202314) do
   create_table "aliases", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -19,6 +19,21 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_29_022127) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.index ["user_id"], name: "index_aliases_on_user_id"
+  end
+
+  create_table "aliases_tags", id: false, force: :cascade do |t|
+    t.integer "alias_id", null: false
+    t.integer "tag_id", null: false
+    t.index ["alias_id", "tag_id"], name: "index_aliases_tags_on_alias_id_and_tag_id", unique: true
+    t.index ["tag_id", "alias_id"], name: "index_aliases_tags_on_tag_id_and_alias_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "color", default: "#6366f1"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -34,12 +49,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_29_022127) do
   end
 
   create_table "votes", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.integer "user_id"
     t.integer "alias_id", null: false
     t.string "vote_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ip_address"
     t.index ["alias_id"], name: "index_votes_on_alias_id"
+    t.index ["ip_address", "alias_id"], name: "index_votes_on_ip_address_and_alias_id", unique: true, where: "user_id IS NULL"
     t.index ["user_id", "alias_id"], name: "index_votes_on_user_id_and_alias_id"
     t.index ["user_id"], name: "index_votes_on_user_id"
   end

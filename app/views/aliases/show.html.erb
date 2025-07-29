@@ -2,7 +2,18 @@
   <div class="flex items-center justify-between">
     <div>
       <h2 class="text-3xl font-bold text-gray-900"><%= @alias.name %></h2>
-      <p class="mt-2 text-sm text-gray-700">Git alias details</p>
+      <div class="mt-2 flex items-center space-x-2">
+        <p class="text-sm text-gray-700">Git alias details</p>
+        <% if @alias.user %>
+          <span class="text-gray-400">•</span>
+          <%= link_to profile_path(@alias.user.email.split('@').first), class: "text-sm text-gray-600 hover:text-indigo-600" do %>
+            Shared by <%= @alias.user.email.split('@').first %>
+          <% end %>
+        <% else %>
+          <span class="text-gray-400">•</span>
+          <span class="text-sm text-gray-600">Shared by anonymous</span>
+        <% end %>
+      </div>
     </div>
     <div class="flex space-x-3">
       <%= link_to "Edit", edit_alias_path(@alias), class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>

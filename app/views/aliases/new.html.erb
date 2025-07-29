@@ -1,7 +1,7 @@
 <div class="space-y-8">
   <div>
-    <h2 class="text-3xl font-bold text-gray-900">New Git Alias</h2>
-    <p class="mt-2 text-sm text-gray-700">Create a new Git alias to improve your workflow</p>
+    <h2 class="text-3xl font-bold text-gray-900">Create an Alias</h2>
+    <p class="mt-2 text-sm text-gray-700">Share your useful git alias with the rest of the world!</p>
   </div>
 
   <div class="bg-white shadow-sm rounded-lg border border-gray-200">
@@ -44,6 +44,43 @@
         <div>
           <%= form.label :code, "Git Command", class: "block text-sm font-medium text-gray-700" %>
           <%= form.text_area :code, rows: 3, class: "mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 sm:text-sm font-mono resize-none p-3 bg-gray-50 hover:bg-white focus:bg-white leading-relaxed", placeholder: "e.g. status --short --branch" %>
+        </div>
+
+        <div>
+          <%= form.label :tag_list, "Tags", class: "block text-sm font-medium text-gray-700" %>
+          <div class="mt-2" data-controller="tag-selector" data-tag-selector-value="<%= form.object.tag_list %>">
+            <!-- Selected tags display -->
+            <div class="flex flex-wrap gap-2 mb-3" data-tag-selector-target="selectedTags">
+              <!-- Pills will be inserted here -->
+            </div>
+            
+            <!-- Tag input -->
+            <div class="relative">
+              <input type="text" 
+                     data-tag-selector-target="input"
+                     placeholder="Type to add tags..."
+                     class="block w-full border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 sm:text-sm p-3 bg-gray-50 hover:bg-white focus:bg-white">
+              
+              <!-- Popular tags suggestions -->
+              <div class="mt-2" data-tag-selector-target="suggestions">
+                <p class="text-xs text-gray-500 mb-1">Popular tags:</p>
+                <div class="flex flex-wrap gap-1">
+                  <% ["workflow", "basic", "log", "branch", "commit", "stash", "history", "remote", "reset"].each do |tag| %>
+                    <button type="button" 
+                            data-action="click->tag-selector#addTag"
+                            data-tag="<%= tag %>"
+                            class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700 hover:bg-indigo-100 hover:text-indigo-800 transition-colors duration-200">
+                      <%= tag %>
+                    </button>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Hidden field for form submission -->
+            <%= form.hidden_field :tag_list, data: { tag_selector_target: "hiddenField" } %>
+          </div>
+          <p class="mt-1 text-sm text-gray-500">Click suggestions or type your own tags</p>
         </div>
 
         <div class="flex justify-end space-x-3">

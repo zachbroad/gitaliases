@@ -1,12 +1,12 @@
 class AliasesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:vote]
 
   def index
-    @aliases = current_user.aliases
+    @aliases = current_user.aliases.sort_by(&:score)
   end
 
   def show
-    @alias = current_user.aliases.find(params[:id])
+    @alias = Alias.find(params[:id])
   end
 
   def new
@@ -48,9 +48,16 @@ class AliasesController < ApplicationController
 
   def vote
     @alias = Alias.find params[:id]
-    vote = @alias.votes.find_or_initialize_by(user: current_user)
     
-    # Toggle functionality: if user clicks same vote type, remove the vote
+    if current_user
+      # Logged in user voting
+      vote = @alias.votes.find_or_initialize_by(user: current_user)
+    else
+      # Anonymous voting by IP
+      vote = @alias.votes.find_or_initialize_by(ip_address: request.remote_ip, user_id: nil)
+    end
+    
+    # Toggle functionality: if user/IP clicks same vote type, remove the vote
     if vote.persisted? && vote.vote_type == params[:vote_type]
       vote.destroy
     else
@@ -67,6 +74,6 @@ class AliasesController < ApplicationController
   private
 
   def alias_params
-    params.require(:alias).permit(:name, :description, :code)
+    params.require(:alias).permit(:name, :description, :code, :tag_list)
   end
 end
