@@ -1,9 +1,9 @@
 <div class="space-y-8">
   <!-- Header -->
   <div class="text-center">
-    <h1 class="text-4xl font-bold text-gray-900">Community Members</h1>
-    <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-      Discover the most popular contributors to GitAliases!
+    <h1 class="text-4xl font-bold text-gray-900 dark:text-white">Community Members</h1>
+    <p class="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+      Discover talented developers sharing their Git aliases with the community
     </p>
   </div>
 
@@ -30,7 +30,7 @@
   <!-- Members Grid -->
   <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
     <% @profiles.includes(:aliases).each do |profile| %>
-      <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow duration-200">
         <div class="p-6">
           <!-- Avatar and Name -->
           <div class="flex items-center space-x-3 mb-4">
@@ -40,10 +40,10 @@
               </span>
             </div>
             <div class="flex-1 min-w-0">
-              <h3 class="text-lg font-semibold text-gray-900 truncate">
+              <h3 class="text-lg font-semibold text-gray-900 dark:text-white truncate">
                 <%= profile.email.split('@').first %>
               </h3>
-              <p class="text-sm text-gray-500">
+              <p class="text-sm text-gray-500 dark:text-gray-400">
                 <%= pluralize(profile.aliases.count, 'alias') %>
               </p>
             </div>
@@ -52,28 +52,28 @@
           <!-- Stats -->
           <div class="grid grid-cols-2 gap-4 mb-4">
             <div class="text-center">
-              <div class="text-2xl font-bold text-gray-900"><%= profile.aliases.count %></div>
-              <div class="text-xs text-gray-500">Aliases</div>
+              <div class="text-2xl font-bold text-gray-900 dark:text-white"><%= profile.aliases.count %></div>
+              <div class="text-xs text-gray-500 dark:text-gray-400">Aliases</div>
             </div>
             <div class="text-center">
-              <div class="text-2xl font-bold text-green-600"><%= profile.aliases.sum(&:likes_count) %></div>
-              <div class="text-xs text-gray-500">Likes</div>
+              <div class="text-2xl font-bold text-green-600 dark:text-green-400"><%= profile.aliases.sum(&:likes_count) %></div>
+              <div class="text-xs text-gray-500 dark:text-gray-400">Likes</div>
             </div>
           </div>
 
           <!-- Recent Aliases Preview -->
           <% if profile.aliases.any? %>
             <div class="mb-4">
-              <h4 class="text-sm font-medium text-gray-700 mb-2">Recent Aliases</h4>
+              <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Recent Aliases</h4>
               <div class="space-y-1">
                 <% profile.aliases.limit(2).each do |alias_item| %>
-                  <div class="text-xs bg-gray-50 rounded px-2 py-1">
-                    <span class="font-mono text-gray-800"><%= alias_item.name %></span>
-                    <span class="text-gray-500">• <%= alias_item.score %> score</span>
+                  <div class="text-xs bg-gray-50 dark:bg-gray-700 rounded px-2 py-1">
+                    <span class="font-mono text-gray-800 dark:text-gray-200"><%= alias_item.name %></span>
+                    <span class="text-gray-500 dark:text-gray-400">• <%= alias_item.score %> score</span>
                   </div>
                 <% end %>
                 <% if profile.aliases.count > 2 %>
-                  <div class="text-xs text-gray-500 px-2">
+                  <div class="text-xs text-gray-500 dark:text-gray-400 px-2">
                     +<%= profile.aliases.count - 2 %> more...
                   </div>
                 <% end %>
@@ -81,13 +81,13 @@
             </div>
           <% else %>
             <div class="mb-4 text-center py-3">
-              <div class="text-gray-400 text-sm">No aliases yet</div>
+              <div class="text-gray-400 dark:text-gray-500 text-sm">No aliases yet</div>
             </div>
           <% end %>
 
           <!-- Action Button -->
           <%= link_to profile_path(profile.email.split('@').first), 
-              class: "block w-full text-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200" do %>
+              class: "block w-full text-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200" do %>
             View Profile
           <% end %>
         </div>
@@ -98,13 +98,13 @@
   <!-- Empty State -->
   <% if @profiles.empty? %>
     <div class="text-center py-12">
-      <div class="mx-auto h-24 w-24 rounded-full bg-gray-100 flex items-center justify-center mb-6">
-        <svg class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div class="mx-auto h-24 w-24 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center mb-6">
+        <svg class="h-12 w-12 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
         </svg>
       </div>
-      <h3 class="text-xl font-medium text-gray-900 mb-2">No members yet</h3>
-      <p class="text-gray-500 mb-8 max-w-md mx-auto">
+      <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-2">No members yet</h3>
+      <p class="text-gray-500 dark:text-gray-400 mb-8 max-w-md mx-auto">
         Be the first to join our community and share your Git aliases!
       </p>
     </div>

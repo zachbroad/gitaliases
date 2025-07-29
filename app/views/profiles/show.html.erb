@@ -1,39 +1,39 @@
 <div class="space-y-8">
   <div class="flex items-center justify-between">
     <div>
-      <h2 class="text-3xl font-bold text-gray-900"><%= @user.email.split('@').first %>'s Aliases</h2>
-      <p class="mt-2 text-sm text-gray-700">Git aliases shared by <%= @user.email.split('@').first %></p>
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white"><%= @user.email.split('@').first %>'s Aliases</h2>
+      <p class="mt-2 text-sm text-gray-700 dark:text-gray-300">Git aliases shared by <%= @user.email.split('@').first %></p>
     </div>
   </div>
 
   <% if @aliases.any? %>
     <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       <% @aliases.each do |alias_item| %>
-        <div class="bg-white overflow-hidden shadow-sm rounded-lg border border-gray-200 hover:shadow-md transition-shadow duration-200">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow duration-200">
           <div class="px-6 py-5">
             <div class="flex items-center justify-between">
-              <%= link_to alias_item, class: "text-lg font-semibold text-gray-900 truncate hover:text-indigo-600" do %>
+              <%= link_to alias_item, class: "text-lg font-semibold text-gray-900 dark:text-white truncate hover:text-indigo-600 dark:hover:text-indigo-400" do %>
                 <%= alias_item.name %>
               <% end %>
-              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">
                 git
               </span>
             </div>
             
-            <p class="mt-3 text-sm text-gray-600 line-clamp-2">
+            <p class="mt-3 text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
               <%= alias_item.description %>
             </p>
             
             <div class="mt-4">
-              <div class="bg-gray-50 rounded-md p-3 border">
-                <code class="text-sm font-mono text-gray-800 break-all">
+              <div class="bg-gray-50 dark:bg-gray-700 rounded-md p-3 border border-gray-200 dark:border-gray-600">
+                <code class="text-sm font-mono text-gray-800 dark:text-gray-200 break-all">
                   <%= alias_item.code %>
                 </code>
               </div>
             </div>
             
             <div class="mt-4 flex justify-end">
-              <button type="button" class="inline-flex items-center px-3 py-1.5 border border-gray-300 text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <button type="button" class="inline-flex items-center px-3 py-1.5 border border-gray-300 dark:border-gray-600 text-xs font-medium rounded text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Copy
               </button>
             </div>
@@ -43,15 +43,15 @@
     </div>
   <% else %>
     <div class="text-center py-12">
-      <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
       </svg>
-      <h3 class="mt-2 text-sm font-medium text-gray-900">No aliases found</h3>
-      <p class="mt-1 text-sm text-gray-500"><%= @user.email.split('@').first %> hasn't shared any Git aliases yet.</p>
+      <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">No aliases found</h3>
+      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400"><%= @user.email.split('@').first %> hasn't shared any Git aliases yet.</p>
     </div>
   <% end %>
   
   <div class="mt-8">
-    <%= link_to "← Back to All Aliases", root_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+    <%= link_to "← Back to All Aliases", root_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
   </div>
 </div>

@@ -1,17 +1,17 @@
 <div class="space-y-8">
   <div class="flex items-center justify-between">
     <div>
-      <h2 class="text-3xl font-bold text-gray-900"><%= @alias.name %></h2>
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white"><%= @alias.name %></h2>
       <div class="mt-2 flex items-center space-x-2">
-        <p class="text-sm text-gray-700">Git alias details</p>
+        <p class="text-sm text-gray-700 dark:text-gray-300">Git alias details</p>
         <% if @alias.user %>
-          <span class="text-gray-400">•</span>
-          <%= link_to profile_path(@alias.user.email.split('@').first), class: "text-sm text-gray-600 hover:text-indigo-600" do %>
+          <span class="text-gray-400 dark:text-gray-500">•</span>
+          <%= link_to profile_path(@alias.user.email.split('@').first), class: "text-sm text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400" do %>
             Shared by <%= @alias.user.email.split('@').first %>
           <% end %>
         <% else %>
-          <span class="text-gray-400">•</span>
-          <span class="text-sm text-gray-600">Shared by anonymous</span>
+          <span class="text-gray-400 dark:text-gray-500">•</span>
+          <span class="text-sm text-gray-600 dark:text-gray-400">Shared by anonymous</span>
         <% end %>
       </div>
     </div>
@@ -23,52 +23,52 @@
     </div>
   </div>
 
-  <div class="bg-white shadow-sm rounded-lg border border-gray-200">
+  <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg border border-gray-200 dark:border-gray-700">
     <div class="px-6 py-8">
       <div class="space-y-6">
         <div>
-          <dt class="text-sm font-medium text-gray-500">Alias Name</dt>
-          <dd class="mt-1 text-lg text-gray-900 font-mono bg-gray-50 px-3 py-2 rounded-md border">
+          <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Alias Name</dt>
+          <dd class="mt-1 text-lg text-gray-900 dark:text-white font-mono bg-gray-50 dark:bg-gray-700 px-3 py-2 rounded-md border border-gray-200 dark:border-gray-600">
             git <%= @alias.name %>
           </dd>
         </div>
 
         <div>
-          <dt class="text-sm font-medium text-gray-500">Description</dt>
-          <dd class="mt-1 text-sm text-gray-900">
+          <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Description</dt>
+          <dd class="mt-1 text-sm text-gray-900 dark:text-white">
             <%= @alias.description %>
           </dd>
         </div>
 
         <div>
-          <dt class="text-sm font-medium text-gray-500">Git Command</dt>
+          <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Git Command</dt>
           <dd class="mt-1">
-            <div class="bg-gray-900 text-gray-100 p-4 rounded-md font-mono text-sm">
+            <div class="bg-gray-900 dark:bg-gray-950 text-gray-100 dark:text-gray-200 p-4 rounded-md font-mono text-sm">
               <span class="text-green-400">git</span> <%= @alias.code %>
             </div>
           </dd>
         </div>
 
         <div>
-          <dt class="text-sm font-medium text-gray-500">Usage Example</dt>
+          <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Usage Example</dt>
           <dd class="mt-1">
-            <div class="bg-blue-50 border border-blue-200 rounded-md p-4">
-              <p class="text-sm text-blue-800">
-                <span class="font-medium">Instead of:</span> <code class="bg-blue-100 px-2 py-1 rounded">git <%= @alias.code %></code>
+            <div class="bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded-md p-4">
+              <p class="text-sm text-blue-800 dark:text-blue-200">
+                <span class="font-medium">Instead of:</span> <code class="bg-blue-100 dark:bg-blue-800 text-blue-900 dark:text-blue-100 px-2 py-1 rounded">git <%= @alias.code %></code>
               </p>
-              <p class="text-sm text-blue-800 mt-2">
-                <span class="font-medium">Use:</span> <code class="bg-blue-100 px-2 py-1 rounded">git <%= @alias.name %></code>
+              <p class="text-sm text-blue-800 dark:text-blue-200 mt-2">
+                <span class="font-medium">Use:</span> <code class="bg-blue-100 dark:bg-blue-800 text-blue-900 dark:text-blue-100 px-2 py-1 rounded">git <%= @alias.name %></code>
               </p>
             </div>
           </dd>
         </div>
 
         <div>
-          <dt class="text-sm font-medium text-gray-500">Installation</dt>
+          <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Installation</dt>
           <dd class="mt-1">
-            <div class="bg-gray-50 border border-gray-200 rounded-md p-4">
-              <p class="text-sm text-gray-700 mb-2">Add this to your Git configuration:</p>
-              <code class="text-sm font-mono text-gray-900 bg-white px-3 py-2 rounded border block">
+            <div class="bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-md p-4">
+              <p class="text-sm text-gray-700 dark:text-gray-300 mb-2">Add this to your Git configuration:</p>
+              <code class="text-sm font-mono text-gray-900 dark:text-white bg-white dark:bg-gray-800 px-3 py-2 rounded border border-gray-200 dark:border-gray-600 block">
                 git config --global alias.<%= @alias.name %> "<%= @alias.code %>"
               </code>
             </div>
@@ -79,10 +79,10 @@
   </div>
 
   <div class="flex justify-between">
-    <%= link_to "← Back to Aliases", aliases_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+    <%= link_to "← Back to Aliases", aliases_path, class: "inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
     
     <div class="flex space-x-3">
-      <%= link_to "Edit Alias", edit_alias_path(@alias), class: "inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+      <%= link_to "Edit Alias", edit_alias_path(@alias), class: "inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
     </div>
   </div>
 </div>

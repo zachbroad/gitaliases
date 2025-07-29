@@ -161,7 +161,7 @@ default_aliases.each do |alias_data|
     record.description = alias_data[:description]
     record.code = alias_data[:code]
   end
-  
+
   # Add tags if they don't already exist
   if alias_data[:tags] && alias_record.tags.empty?
     alias_record.tag_list = alias_data[:tags]

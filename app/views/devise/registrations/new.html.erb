@@ -1,7 +1,7 @@
-<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+<div class="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
   <div class="max-w-md w-full space-y-8">
     <div>
-      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
         Create your account
       </h2>
     </div>
@@ -11,26 +11,26 @@
 
       <div class="space-y-4">
         <div>
-          <%= f.label :email, class: "block text-sm font-medium text-gray-700" %>
+          <%= f.label :email, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email",
-              class: "mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm",
+              class: "mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-gray-800 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm",
               placeholder: "Email address" %>
         </div>
 
         <div>
-          <%= f.label :password, class: "block text-sm font-medium text-gray-700" %>
+          <%= f.label :password, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
           <% if @minimum_password_length %>
-            <span class="text-xs text-gray-500">(<%= @minimum_password_length %> characters minimum)</span>
+            <span class="text-xs text-gray-500 dark:text-gray-400">(<%= @minimum_password_length %> characters minimum)</span>
           <% end %>
           <%= f.password_field :password, autocomplete: "new-password",
-              class: "mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm",
+              class: "mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-gray-800 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm",
               placeholder: "Password" %>
         </div>
 
         <div>
-          <%= f.label :password_confirmation, class: "block text-sm font-medium text-gray-700" %>
+          <%= f.label :password_confirmation, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
           <%= f.password_field :password_confirmation, autocomplete: "new-password",
-              class: "mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm",
+              class: "mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-gray-800 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm",
               placeholder: "Confirm password" %>
         </div>
       </div>

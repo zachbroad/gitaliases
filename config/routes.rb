@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get "profiles" => "profiles#list", as: :profiles
   get "profile/:username" => "profiles#show", as: :profile
   get "profile/:username/aliases" => "profiles#aliases", as: :profile_aliases
+  get "me/aliases" => "aliases#index", as: :my_aliases
+  get "me" => "profiles#me", as: :me
 
   # Authenticated user's alias management
   resources :aliases do
@@ -26,5 +28,4 @@ Rails.application.routes.draw do
     end
   end
 
-  get "my/aliases" => "aliases#index", as: :my_aliases
 end

@@ -15,6 +15,7 @@ This is a Rails 8.0 application for managing Git aliases. The application uses m
 - **Database**: SQLite3 with single `aliases` table
 - **Frontend**: Rails with Hotwire (Turbo + Stimulus), importmap for JavaScript
 - **Styling**: Tailwind CSS v4 with Rails asset pipeline (Propshaft)
+- **Theme System**: Three-mode dark/light/system theme toggle with localStorage persistence
 
 ## Development Commands
 
