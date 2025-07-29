@@ -27,5 +27,4 @@ Rails.application.routes.draw do
       post :vote
     end
   end
-
 end
