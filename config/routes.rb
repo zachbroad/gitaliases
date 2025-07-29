@@ -13,12 +13,17 @@ Rails.application.routes.draw do
   # Public home page showing all aliases
   get "/" => "home#index", as: :home
   root "home#index"
-  
+
   # User profile routes
   get "profile/:username" => "profiles#show", as: :profile
   get "profile/:username/aliases" => "profiles#aliases", as: :profile_aliases
-  
+
   # Authenticated user's alias management
-  resources :aliases, except: [:index]
+  resources :aliases do
+    member do
+      post :vote
+    end
+  end
+
   get "my/aliases" => "aliases#index", as: :my_aliases
 end
