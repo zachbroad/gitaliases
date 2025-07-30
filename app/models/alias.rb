@@ -36,6 +36,11 @@ class Alias < ApplicationRecord
     stored_code.present? ? "git #{stored_code}" : ""
   end
 
+  def config_command
+    stored_code = read_attribute(:code)
+    "git config --global alias.#{name} \"#{stored_code}\""
+  end
+
   def likes_count
     votes.where(vote_type: "like").count
   end
