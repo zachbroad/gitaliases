@@ -1,5 +1,5 @@
 class AliasesController < ApplicationController
-  before_action :authenticate_user!, except: [ :vote ]
+  before_action :authenticate_user!, except: [ :index, :show ]
 
   def index
     @aliases = current_user.aliases.sort_by(&:score) if current_user
@@ -25,12 +25,19 @@ class AliasesController < ApplicationController
 
   def edit
     @alias = Alias.find(params[:id])
+
     if @alias.user != current_user
       redirect_to root_path, alert: "You are not authorized to edit this alias."
     end
   end
 
   def update
+    @alias = Alias.find(params[:id])
+
+    if @alias.user != current_user
+      redirect_to root_path, alert: "You are not authorized to edit this alias."
+    end
+
     @alias = current_user.aliases.find(params[:id])
 
     if @alias.update(alias_params)

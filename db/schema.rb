@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.0].define(version: 2025_07_29_202314) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
+
   create_table "aliases", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -56,7 +59,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_29_202314) do
     t.datetime "updated_at", null: false
     t.string "ip_address"
     t.index ["alias_id"], name: "index_votes_on_alias_id"
-    t.index ["ip_address", "alias_id"], name: "index_votes_on_ip_address_and_alias_id", unique: true, where: "user_id IS NULL"
+    t.index ["ip_address", "alias_id"], name: "index_votes_on_ip_address_and_alias_id", unique: true, where: "(user_id IS NULL)"
     t.index ["user_id", "alias_id"], name: "index_votes_on_user_id_and_alias_id"
     t.index ["user_id"], name: "index_votes_on_user_id"
   end

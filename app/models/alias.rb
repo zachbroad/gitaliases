@@ -6,6 +6,7 @@ class Alias < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
   validates :code, presence: true
+  validate :code_must_be_git_command
 
   before_save :remove_git_prefix_from_code
 
@@ -30,6 +31,11 @@ class Alias < ApplicationRecord
     end
   }
 
+  def display_code
+    stored_code = read_attribute(:code)
+    stored_code.present? ? "git #{stored_code}" : ""
+  end
+
   def likes_count
     votes.where(vote_type: "like").count
   end
@@ -45,6 +51,10 @@ class Alias < ApplicationRecord
   def user_vote(user)
     return nil unless user
     votes.find_by(user: user)
+  end
+
+  def can_user_edit_alias?(user)
+    user == self.user
   end
 
   def ip_vote(ip_address)
@@ -63,5 +73,21 @@ class Alias < ApplicationRecord
 
   def remove_git_prefix_from_code
     self.code = self.code.sub(/^git /, "") || ""
+  end
+
+  private
+
+  def code_must_be_git_command
+    return if code.blank?
+
+    # Remove git prefix for validation if present
+    cleaned_code = code.sub(/^git /, "")
+
+    # Check if it starts with ! which indicates shell command
+    if cleaned_code.start_with?("!")
+      errors.add(:code, "cannot contain shell commands (commands starting with !)")
+    end
+
+    true
   end
 end
